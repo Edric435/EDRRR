@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+        }
+        .question-container {
+            display: none;
+        }
+        .question-container.active {
+            display: block;
+        }
+        img {
+            width: 100%; /* Ensure image is responsive */
+            height: auto;
+            margin-top: 10px;
+            object-fit: contain; /* Ensure the image does not get distorted */
+        }
+    </style>
+</head>
+<body>
+    <h1>Quiz</h1>
+
+    <!-- Question 1 -->
+    <div id="question1" class="question-container active">
+        <p>WHO IS THE TECHNICAL HEAD OF TRESSURE HUNT?</p>
+        <input type="text" id="answer1" placeholder="Your answer">
+        <button onclick="checkAnswer(1)">Submit</button>
+        <p id="error1" style="color: red; display: none;">Incorrect, try again.</p>
+        <div id="image1" style="display: none;">
+            <img src="" alt="Image for question 1">
+        </div>
+    </div>
+
+    <!-- Question 2 -->
+    <div id="question2" class="question-container">
+        <p>WHAT IS JOEL'S FATHER'S NAME?</p>
+        <input type="text" id="answer2" placeholder="Your answer">
+        <button onclick="checkAnswer(2)">Submit</button>
+        <p id="error2" style="color: red; display: none;">Incorrect, try again.</p>
+        <div id="image2" style="display: none;">
+            <img src="JOEL.jpg" alt="Image for question 2">
+        </div>
+    </div>
+
+    <!-- Question 3 -->
+    <div id="question3" class="question-container">
+        <p>WHAT IS THE MAIN SKILL OF JANZ?</p>
+        <input type="text" id="answer3" placeholder="Your answer">
+        <button onclick="checkAnswer(3)">Submit</button>
+        <p id="error3" style="color: red; display: none;">Incorrect, try again.</p>
+        <div id="image3" style="display: none;">
+            <img src="JANZ.jpg" alt="Image for question 3">
+        </div>
+    </div>
+
+    <!-- Question 4 -->
+    <div id="question4" class="question-container">
+        <p>WHO IS THE MAIN PULLI OF TRESSURE HUNT?</p>
+        <input type="text" id="answer4" placeholder="Your answer">
+        <button onclick="checkAnswer(4)">Submit</button>
+        <p id="error4" style="color: red; display: none;">Incorrect, try again.</p>
+        <div id="image4" style="display: none;">
+            <img src="RIZWAN.jpg" alt="Image for question 4">
+        </div>
+    </div>
+
+    <script>
+        function checkAnswer(questionNumber) {
+            let answer;
+            let correctAnswer;
+            let nextQuestion;
+            let imageId;
+
+            // Determine the correct answer and next question based on the question number
+            if (questionNumber === 1) {
+                answer = document.getElementById('answer1').value.trim().toLowerCase();
+                correctAnswer = 'edric'; // Correct answer for question 1
+                nextQuestion = 'question2';
+                imageId = 'image1';
+            } else if (questionNumber === 2) {
+                answer = document.getElementById('answer2').value.trim().toLowerCase();
+                correctAnswer = 'thomas'; // Correct answer for question 2
+                nextQuestion = 'question3';
+                imageId = 'image2';
+            } else if (questionNumber === 3) {
+                answer = document.getElementById('answer3').value.trim().toLowerCase();
+                correctAnswer = 'dance'; // Correct answer for question 3
+                nextQuestion = 'question4';
+                imageId = 'image3';
+            } else if (questionNumber === 4) {
+                answer = document.getElementById('answer4').value.trim().toLowerCase();
+                correctAnswer = 'rizwan'; // Correct answer for question 4
+                imageId = 'image4';
+            }
+
+            if (answer === correctAnswer) {
+                // Show the image for the current question
+                document.getElementById(imageId).style.display = 'block';
+                
+                // After a brief moment, show the next question
+                setTimeout(() => {
+                    // Hide current question and image
+                    document.getElementById(`question${questionNumber}`).classList.remove('active');
+                    document.getElementById(imageId).style.display = 'none';
+
+                    // Show next question if there is one
+                    if (nextQuestion) {
+                        document.getElementById(nextQuestion).classList.add('active');
+                    } else {
+                        alert('You have completed the quiz!');
+                    }
+                }, 2000); // Wait for 2 seconds before moving to the next question
+            } else {
+                // Show error message
+                document.getElementById(`error${questionNumber}`).style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
